@@ -68,14 +68,12 @@ const BoxCol = styled.div`
     display:flex;
     flex-direction:column;
     padding:25px;
-    border:1px solid black;
 `;
 
 const BoxRow = styled.div`
     display:flex;
     flex-direction:row;
     padding:25px;
-    border:1px solid black;
 `;
 
 const ChartsBox = styled.div`

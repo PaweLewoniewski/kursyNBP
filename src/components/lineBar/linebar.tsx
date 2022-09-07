@@ -3,8 +3,7 @@ import styled from "styled-components";
 type CurrencyDataTypes = {
     id:number;
     currency:string;
-    ask:number;
-    bid:number;
+    mid:number;
 }
 
 interface LinebarProps {
@@ -20,7 +19,7 @@ const LineBar = ({name, data}:LinebarProps) => {
             <Slider>
                 {data.map((item) => (
                         <BarElement key={item.id}>
-                            | {item.currency} : {item.ask} | 
+                            | {item.currency} : {item.mid} | 
                         </BarElement>
                     ))}
             </Slider>
