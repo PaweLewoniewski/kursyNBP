@@ -47,7 +47,7 @@ const leftToRight = keyframes`
         transform: translateX(100%);
     }
     to {
-        transform: translateX(-200%);
+        transform: translateX(-230%);
     }
 `;
 

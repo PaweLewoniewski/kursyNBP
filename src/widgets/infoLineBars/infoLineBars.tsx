@@ -10,7 +10,7 @@ const InfoLineBarsComponent = () => {
     useEffect(() => {
         async function FetchData() {
             const tmp = await api.getMidCurrency();
-            setMidList(tmp[0].rates);
+            setMidList(tmp);
         }
         FetchData();
     }, []);

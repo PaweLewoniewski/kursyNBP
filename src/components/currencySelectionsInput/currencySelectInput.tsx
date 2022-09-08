@@ -2,6 +2,11 @@ import { FormControl, InputAdornment, InputLabel, MenuItem, OutlinedInput, TextF
 import { useState } from "react";
 import styled from "styled-components";
 
+// interface CurrencySelectProps {
+//      value:string;
+//      label:string;
+//      amount:string;
+// }
 
 const CurrencySelectinput = () => {
 
