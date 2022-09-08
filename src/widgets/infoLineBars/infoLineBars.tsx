@@ -1,14 +1,24 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import LineBar from "../../components/lineBar/linebar";
+import api from "../../queries/fetchMidCurrencyQuery";
 
 const InfoLineBarsComponent = () => {
 
-    const data = [{'currency':'USD','id':1,'mid':4.8223}];
+    const [midList, setMidList] = useState();
 
+    useEffect(() => {
+        async function FetchData() {
+            const tmp = await api.getMidCurrency();
+            setMidList(tmp[0].rates);
+        }
+        FetchData();
+    }, []);
 
+    console.log(midList);
     return (
         <Contener>
-            <LineBar name={"Śrerdni Kurs Walut"} data={data} />
+            <LineBar name={"Śrerdni Kurs Walut"} data={midList} />
         </Contener>
     );
 };
