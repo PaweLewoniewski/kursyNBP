@@ -1,77 +1,59 @@
-import { FormControl, InputAdornment, InputLabel, MenuItem, OutlinedInput, TextField } from "@mui/material";
-import { useState } from "react";
+import { FormControl, MenuItem, OutlinedInput, TextField } from "@mui/material";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
-// interface CurrencySelectProps {
-//      value:string;
-//      label:string;
-//      amount:string;
-// }
 
-const CurrencySelectinput = () => {
+type MultipleCurrencyDataTypes = {
+    currency: string;
+    code: string;
+    bid: number;
+    ask:number;
+}
 
-    const [values, setValues] = useState({
-        amount: '',
-        password: '',
-        weight: '',
-        weightRange: '',
-        showPassword: false,
-    });
+interface CurrencySelectProps {
+    multipleCurrencies?:MultipleCurrencyDataTypes[];
+}
+
+const CurrencySelectinput = ({multipleCurrencies}:CurrencySelectProps) => {
+
+    const [currency, setCurrency] = useState('EUR');
+    const currentValue = multipleCurrencies?.find(item => item.code === currency);
+    const sell = currentValue?.ask;
+    const [values, setValues] = useState({amount: sell});
 
     const handleChange = (prop: any) => (event: { target: { value: any; }; }) => {
         setValues({ ...values, [prop]: event.target.value });
     };
 
-    /*------------------------------------------------------------*/
-
-    const currencies = [
-        {
-            value: 'USD',
-            label: '$',
-        },
-        {
-            value: 'EUR',
-            label: '€',
-        },
-        {
-            value: 'BTC',
-            label: '฿',
-        },
-        {
-            value: 'JPY',
-            label: '¥',
-        },
-    ];
-
-    const [currency, setCurrency] = useState('EUR');
-
     const handleChangeCurrency = (event: any) => {
         setCurrency(event.target.value);
+        setValues({amount: sell});
     };
+
+    useEffect(() => {
+        setValues({amount: sell});
+    }, [sell]);
 
     return (
 
         <FormControl fullWidth sx={{ m: 1 }}>
             <Fields>
-                <InputLabel htmlFor="outlined-adornment-amount">Kwota</InputLabel>
                 <OutlinedInput
-                    id="outlined-adornment-amount"
+                    fullWidth
                     value={values.amount}
                     onChange={handleChange('amount')}
-                    startAdornment={<InputAdornment position="start">$</InputAdornment>}
-                    label="Amount"
                 />
-
                 <TextField
+                 fullWidth
                     id="outlined-select-currency"
                     select
-                    label="Select"
+                    label="Waluta"
                     value={currency}
                     onChange={handleChangeCurrency}
                 >
-                    {currencies.map((option) => (
-                        <MenuItem key={option.value} value={option.value}>
-                            {option.label}
+                    {multipleCurrencies !== undefined && multipleCurrencies.map((option) => (
+                        <MenuItem key={option.code} value={option.code}>
+                            {option.currency}
                         </MenuItem>
                     ))}
                 </TextField>

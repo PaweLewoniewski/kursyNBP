@@ -1,9 +1,24 @@
 import styled from "styled-components";
 import CurrencySelectinput from "../../components/currencySelectionsInput/currencySelectInput";
 import { Chart } from "react-google-charts";
+import { useEffect, useState } from "react";
+import api from "../../queries/fetchMidCurrencyQuery";
 
 
 const CalculatorPage = () => {
+
+
+    const [multipleCurrency, setMultipleCurrency] = useState();
+
+    useEffect(() => {
+        async function FetchData() {
+            const tmp = await api.getMultipleCurrency();
+            setMultipleCurrency(tmp);
+        }
+        FetchData();
+    }, []);
+
+    console.log(multipleCurrency);
 
     const data = [
         [
@@ -38,8 +53,8 @@ const CalculatorPage = () => {
     return (
         <Contener>
             <BoxCol>
-                <CurrencySelectinput />
-                <CurrencySelectinput />
+                <CurrencySelectinput multipleCurrencies={multipleCurrency} />
+                <CurrencySelectinput multipleCurrencies={multipleCurrency} />
             </BoxCol>
             <BoxRow>
                 <ChartsBox>
@@ -68,6 +83,7 @@ const BoxCol = styled.div`
     display:flex;
     flex-direction:column;
     padding:25px;
+    /* width:420px; */
 `;
 
 const BoxRow = styled.div`
