@@ -1,6 +1,7 @@
 import { FormControl, InputAdornment, MenuItem, OutlinedInput, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import api from "../../queries/fetchMidCurrencyQuery";
 
 
 export type MultipleCurrencyDataTypes = {
@@ -29,11 +30,13 @@ const CurrencySelectinput = ({multipleCurrencies,parrenthandler}:CurrencySelectP
     const handleChangeCurrency = (event: any) => {
         setCurrency(event.target.value);
         setValues({amount: sell});
+        api.getSingleLastCurrency();
     };
 
     useEffect(() => {
         setValues({amount: sell});
         parrenthandler(currentValue);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [sell]);
 
 

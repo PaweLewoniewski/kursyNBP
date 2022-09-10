@@ -24,7 +24,7 @@ const api = {
             console.error(err);
         }
     },
-    getSingleCurrency: async () => {
+    getSingleLastCurrency: async () => {
         try {
             const response = await fetch(querySingleLastDaysCurrerncy, {
                 method: "GET",
@@ -35,7 +35,7 @@ const api = {
                 },
             });
             const data = await response.json();
-            return data;
+            return console.log(data);
         } catch (err: any) {
             console.error(err);
         }
