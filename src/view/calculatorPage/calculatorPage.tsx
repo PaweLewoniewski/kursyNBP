@@ -8,7 +8,13 @@ import api from "../../queries/fetchMidCurrencyQuery";
 const CalculatorPage = () => {
 
 
-    const [multipleCurrency, setMultipleCurrency] = useState();
+    const [multipleCurrency, setMultipleCurrency] = useState<undefined>();
+    //const [currentCurrencyFirst, setCurrentCurrencyFirst] = useState();
+    // const [currentCurrencySec, setCurrentCurrencySec] = useState();
+
+    const callbackhandler = (props:any) => {
+        console.log(props);
+    }
 
     useEffect(() => {
         async function FetchData() {
@@ -18,7 +24,6 @@ const CalculatorPage = () => {
         FetchData();
     }, []);
 
-    console.log(multipleCurrency);
 
     const data = [
         [
@@ -53,8 +58,8 @@ const CalculatorPage = () => {
     return (
         <Contener>
             <BoxCol>
-                <CurrencySelectinput multipleCurrencies={multipleCurrency} />
-                <CurrencySelectinput multipleCurrencies={multipleCurrency} />
+                <CurrencySelectinput multipleCurrencies={multipleCurrency} parrenthandler={callbackhandler} />
+                <CurrencySelectinput multipleCurrencies={multipleCurrency}  parrenthandler={callbackhandler} />
             </BoxCol>
             <BoxRow>
                 <ChartsBox>

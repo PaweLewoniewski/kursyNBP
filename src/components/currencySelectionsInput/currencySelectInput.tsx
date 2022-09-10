@@ -12,9 +12,10 @@ type MultipleCurrencyDataTypes = {
 
 interface CurrencySelectProps {
     multipleCurrencies?:MultipleCurrencyDataTypes[];
+    parrenthandler:any;
 }
 
-const CurrencySelectinput = ({multipleCurrencies}:CurrencySelectProps) => {
+const CurrencySelectinput = ({multipleCurrencies,parrenthandler}:CurrencySelectProps) => {
 
     const [currency, setCurrency] = useState('EUR');
     const currentValue = multipleCurrencies?.find(item => item.code === currency);
@@ -32,7 +33,10 @@ const CurrencySelectinput = ({multipleCurrencies}:CurrencySelectProps) => {
 
     useEffect(() => {
         setValues({amount: sell});
+        parrenthandler(currentValue);
     }, [sell]);
+
+
 
     return (
 

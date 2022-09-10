@@ -15,7 +15,6 @@ const InfoLineBarsComponent = () => {
         FetchData();
     }, []);
 
-    console.log(midList);
     return (
         <Contener>
             <LineBar name={"Śrerdni Kurs Walut"} data={midList} />
