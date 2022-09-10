@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import CurrencySelectinput from "../../components/currencySelectionsInput/currencySelectInput";
+import CurrencySelectinput, { MultipleCurrencyDataTypes } from "../../components/currencySelectionsInput/currencySelectInput";
 import { Chart } from "react-google-charts";
 import { useEffect, useState } from "react";
 import api from "../../queries/fetchMidCurrencyQuery";
@@ -8,7 +8,7 @@ import api from "../../queries/fetchMidCurrencyQuery";
 const CalculatorPage = () => {
 
 
-    const [multipleCurrency, setMultipleCurrency] = useState<undefined>();
+    const [multipleCurrency, setMultipleCurrency] = useState<MultipleCurrencyDataTypes[]>();
     //const [currentCurrencyFirst, setCurrentCurrencyFirst] = useState();
     // const [currentCurrencySec, setCurrentCurrencySec] = useState();
 

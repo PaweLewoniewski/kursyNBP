@@ -1,9 +1,9 @@
-import { FormControl, MenuItem, OutlinedInput, TextField } from "@mui/material";
+import { FormControl, InputAdornment, MenuItem, OutlinedInput, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 
-type MultipleCurrencyDataTypes = {
+export type MultipleCurrencyDataTypes = {
     currency: string;
     code: string;
     bid: number;
@@ -17,10 +17,10 @@ interface CurrencySelectProps {
 
 const CurrencySelectinput = ({multipleCurrencies,parrenthandler}:CurrencySelectProps) => {
 
-    const [currency, setCurrency] = useState('EUR');
+    const [currency, setCurrency] = useState('');
     const currentValue = multipleCurrencies?.find(item => item.code === currency);
-    const sell = currentValue?.ask;
-    const [values, setValues] = useState({amount: sell});
+    const sell = currentValue?.ask ? currentValue.ask : 0;
+    const [values, setValues] = useState({amount: sell });
 
     const handleChange = (prop: any) => (event: { target: { value: any; }; }) => {
         setValues({ ...values, [prop]: event.target.value });
@@ -46,6 +46,7 @@ const CurrencySelectinput = ({multipleCurrencies,parrenthandler}:CurrencySelectP
                     fullWidth
                     value={values.amount}
                     onChange={handleChange('amount')}
+                    startAdornment={<InputAdornment position="start"></InputAdornment>}
                 />
                 <TextField
                  fullWidth

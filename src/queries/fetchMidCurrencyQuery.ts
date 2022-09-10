@@ -1,10 +1,11 @@
 
 const queryMidCurrency = 'http://api.nbp.pl/api/exchangerates/tables/a';
 const querySingleLastDaysCurrerncy = 'http://api.nbp.pl/api/exchangerates/rates/c/usd/last/30/';
-const queryBidAskCurrency ='https://api.nbp.pl/api/exchangerates/tables/c/';
+const queryBidAskCurrency = 'https://api.nbp.pl/api/exchangerates/tables/c/';
 //const querySingleCurrency = 'https://api.nbp.pl/api/exchangerates/rates/c/usd';
 //const querySingleRageCurrency = 'http://api.nbp.pl/api/exchangerates/rates/c/usd/2022-08-01/2022-08-30/';
 
+const pln = [{ currency: 'polski złoty', code: 'PLN', ask: 1, bid: 1 }]
 
 const api = {
     getMidCurrency: async () => {
@@ -34,7 +35,7 @@ const api = {
                 },
             });
             const data = await response.json();
-           return data;
+            return data;
         } catch (err: any) {
             console.error(err);
         }
@@ -50,7 +51,8 @@ const api = {
                 },
             });
             const data = await response.json();
-           return data[0].rates;
+            const addPln = [...data[0].rates, ...pln];
+            return addPln;
         } catch (err: any) {
             console.error(err);
         }
