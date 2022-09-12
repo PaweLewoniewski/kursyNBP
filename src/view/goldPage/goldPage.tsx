@@ -11,6 +11,8 @@ type GoldPriceTypes = {
 const GoldPage = () => {
 
     const [lastgoldPrices, setlastgoldPrices] = useState<GoldPriceTypes[]>();
+    const [goldValueer, setgoldValueer] = useState();
+
 
     useEffect(() => {
         async function FetchData() {
@@ -21,58 +23,44 @@ const GoldPage = () => {
     }, []);
 
     const todayPrice = lastgoldPrices?.at(-1);
-    //console.log(lastgoldPrices);
-
-    // const daneLabels = lastgoldPrices !== undefined && lastgoldPrices.map((item) => item.data);
-    // const daneData = lastgoldPrices !== undefined && lastgoldPrices.map((item) => item.cena);
-
-    console.log(lastgoldPrices);
-
-
-    // const state = {
-    //     labels: lastgoldPrices !== undefined && lastgoldPrices.map(item => item.data),
-    //     datasets: [
-    //       {
-    //         label: 'Rainfall',
-    //         backgroundColor: [
-    //           '#B21F00',
-    //           '#C9DE00',
-    //           '#2FDE00',
-    //           '#00A6B4',
-    //           '#6800B4'
-    //         ],
-    //         hoverBackgroundColor: [
-    //         '#501800',
-    //         '#4B5000',
-    //         '#175000',
-    //         '#003350',
-    //         '#35014F'
-    //         ],
-    //         data: lastgoldPrices !== undefined && lastgoldPrices.map(item => item.cena)
-    //       }
-    //     ]
-    //   }
-
+    const daneLabels = lastgoldPrices !== undefined ? lastgoldPrices.map((item,index) => [item.data, item.cena]) : [0,0];
 
     const data = [
         [
             "Day",
             "Cena złota"
         ],
-        [1, 37.8],
-        [2, 30.9],
-        [3, 25.4],
-        [4, 11.7],
-        [5, 11.9],
-        [6, 8.8],
-        [7, 7.6],
-        [8, 12.3],
-        [9, 16.9],
-        [10, 12.8],
-        [11, 5.3],
-        [12, 6.6],
-        [13, 4.8],
-        [14, 4.2],
+        
+        daneLabels[0],
+        daneLabels[1],
+        daneLabels[2],
+        daneLabels[3],
+        daneLabels[4],
+        daneLabels[5],
+        daneLabels[6],
+        daneLabels[7],
+        daneLabels[8],
+        daneLabels[9],
+        daneLabels[10],
+        daneLabels[11],
+        daneLabels[12],
+        daneLabels[13],
+        daneLabels[14],
+        daneLabels[15],
+        daneLabels[16],
+        daneLabels[17],
+        daneLabels[18],
+        daneLabels[19],
+        daneLabels[20],
+        daneLabels[21],
+        daneLabels[22],
+        daneLabels[23],
+        daneLabels[24],
+        daneLabels[25],
+        daneLabels[26],
+        daneLabels[27],
+        daneLabels[28],
+        daneLabels[29]
     ];
 
     const options = {
@@ -143,3 +131,28 @@ const ItemName = styled.p`
     color:black;
     padding:5px 35px;
 `;
+
+
+    // const state = {
+    //     labels: lastgoldPrices !== undefined && lastgoldPrices.map(item => item.data),
+    //     datasets: [
+    //       {
+    //         label: 'Rainfall',
+    //         backgroundColor: [
+    //           '#B21F00',
+    //           '#C9DE00',
+    //           '#2FDE00',
+    //           '#00A6B4',
+    //           '#6800B4'
+    //         ],
+    //         hoverBackgroundColor: [
+    //         '#501800',
+    //         '#4B5000',
+    //         '#175000',
+    //         '#003350',
+    //         '#35014F'
+    //         ],
+    //         data: lastgoldPrices !== undefined && lastgoldPrices.map(item => item.cena)
+    //       }
+    //     ]
+    //   }
