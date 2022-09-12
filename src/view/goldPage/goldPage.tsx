@@ -1,48 +1,98 @@
+import { useEffect, useState } from "react";
 import Chart from "react-google-charts";
 import styled from "styled-components";
+import api from "../../queries/fetchMidCurrencyQuery";
+
+type GoldPriceTypes = {
+    data: string;
+    cena: number;
+}
 
 const GoldPage = () => {
+
+    const [lastgoldPrices, setlastgoldPrices] = useState<GoldPriceTypes[]>();
+
+    useEffect(() => {
+        async function FetchData() {
+            const tmp = await api.getGoldPriceLast();
+            setlastgoldPrices(tmp);
+        }
+        FetchData();
+    }, []);
+
+    const todayPrice = lastgoldPrices?.at(-1);
+    //console.log(lastgoldPrices);
+
+    // const daneLabels = lastgoldPrices !== undefined && lastgoldPrices.map((item) => item.data);
+    // const daneData = lastgoldPrices !== undefined && lastgoldPrices.map((item) => item.cena);
+
+    console.log(lastgoldPrices);
+
+
+    // const state = {
+    //     labels: lastgoldPrices !== undefined && lastgoldPrices.map(item => item.data),
+    //     datasets: [
+    //       {
+    //         label: 'Rainfall',
+    //         backgroundColor: [
+    //           '#B21F00',
+    //           '#C9DE00',
+    //           '#2FDE00',
+    //           '#00A6B4',
+    //           '#6800B4'
+    //         ],
+    //         hoverBackgroundColor: [
+    //         '#501800',
+    //         '#4B5000',
+    //         '#175000',
+    //         '#003350',
+    //         '#35014F'
+    //         ],
+    //         data: lastgoldPrices !== undefined && lastgoldPrices.map(item => item.cena)
+    //       }
+    //     ]
+    //   }
+
+
     const data = [
         [
             "Day",
-            "Guardians of the Galaxy",
-            "The Avengers",
-            "Transformers: Age of Extinction",
+            "Cena złota"
         ],
-        [1, 37.8, 80.8, 41.8],
-        [2, 30.9, 69.5, 32.4],
-        [3, 25.4, 57, 25.7],
-        [4, 11.7, 18.8, 10.5],
-        [5, 11.9, 17.6, 10.4],
-        [6, 8.8, 13.6, 7.7],
-        [7, 7.6, 12.3, 9.6],
-        [8, 12.3, 29.2, 10.6],
-        [9, 16.9, 42.9, 14.8],
-        [10, 12.8, 30.9, 11.6],
-        [11, 5.3, 7.9, 4.7],
-        [12, 6.6, 8.4, 5.2],
-        [13, 4.8, 6.3, 3.6],
-        [14, 4.2, 6.2, 3.4],
+        [1, 37.8],
+        [2, 30.9],
+        [3, 25.4],
+        [4, 11.7],
+        [5, 11.9],
+        [6, 8.8],
+        [7, 7.6],
+        [8, 12.3],
+        [9, 16.9],
+        [10, 12.8],
+        [11, 5.3],
+        [12, 6.6],
+        [13, 4.8],
+        [14, 4.2],
     ];
 
     const options = {
         chart: {
-            title: "Box Office Earnings in First Two Weeks of Opening",
-            subtitle: "in millions of dollars (USD)",
+            title: "Aktualnie obowiązująca cena złota NBP",
+            subtitle: "Z ostatnich 30 dni",
         },
     };
 
     return (
         <Contener>
             <BoxCol>
-                <ItemBox><ItemName>Aktualna Cena złota: 254.41</ItemName></ItemBox>
+                <ItemBox><ItemName>Aktualna Cena złota: {todayPrice?.cena} ({todayPrice?.data})</ItemName></ItemBox>
             </BoxCol>
             <BoxRow>
                 <ChartsBox>
                     <Chart
                         chartType="Line"
                         width="100%"
-                        height="400px"
+                        height="300px"
                         data={data}
                         options={options}
                     />
@@ -77,7 +127,6 @@ const ChartsBox = styled.div`
     display:flex;
     flex-direction:row;
     padding:25px;
-    border:1px solid black;
 `;
 
 
