@@ -3,6 +3,7 @@ import CurrencySelectinput, { MultipleCurrencyDataTypes } from "../../components
 import { Chart } from "react-google-charts";
 import { useEffect, useState } from "react";
 import api from "../../queries/fetchMidCurrencyQuery";
+import { Button, ButtonGroup } from "@mui/material";
 
 
 export type LastCurrentCurrencyTypes = {
@@ -16,7 +17,6 @@ const CalculatorPage = () => {
     const [multipleCurrency, setMultipleCurrency] = useState<MultipleCurrencyDataTypes[]>();
     const [currentCurrencyLast, setCurrentCurrencyLast] = useState<LastCurrentCurrencyTypes[] | undefined>();
     const [currentCurrency, setCurrentCurrency] = useState<MultipleCurrencyDataTypes | undefined>();
-    const [labelState, setlabelState] = useState<any>();
 
     const FetchData = async (code:string) => {
         const tmp = await api.getSingleLastCurrency(code);
@@ -80,10 +80,8 @@ const CalculatorPage = () => {
     ];
 
     const options = {
-        chart: {
-            title: `Kurs ostatnich 30 dni`,
-            subtitle: "kurs sprzedaży",
-        },
+        title: `Kurs sprzedaży`,
+        colors: ['green'],
     };
 
     return (
@@ -93,15 +91,22 @@ const CalculatorPage = () => {
                 <CurrencySelectinput multipleCurrencies={multipleCurrency}  parrenthandler={callbackhandler} />
             </BoxCol>
             <BoxRow>
+                {currentCurrency !== undefined ? 
                 <ChartsBox>
                     <Chart
-                        chartType="Line"
+                        chartType="AreaChart"
                         width="100%"
                         height="300px"
                         data={data}
                         options={options}
                     />
-                </ChartsBox>
+                    <BtnContener>
+                    <ButtonGroup size="large" aria-label="large button group">
+                        <Button key="buy">Kupno</Button>
+                        <Button key="sell">Sprzedaż</Button>
+                    </ButtonGroup>
+                </BtnContener>
+                </ChartsBox> : ''}
             </BoxRow>
         </Contener>
     );
@@ -130,6 +135,10 @@ const BoxRow = styled.div`
 
 const ChartsBox = styled.div`
     display:flex;
-    flex-direction:row;
-    padding:25px;
+    flex-direction:column;
+`;
+
+const BtnContener = styled.div`
+    display:flex;
+    justify-content: center;
 `;

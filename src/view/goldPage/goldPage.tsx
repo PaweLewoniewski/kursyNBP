@@ -62,10 +62,8 @@ const GoldPage = () => {
     ];
 
     const options = {
-        chart: {
-            title: "Aktualnie obowiązująca cena złota NBP",
-            subtitle: "Z ostatnich 30 dni",
-        },
+        title: "Aktualnie obowiązująca cena złota NBP",
+        colors: ['gold'],
     };
 
     return (
@@ -76,7 +74,7 @@ const GoldPage = () => {
             <BoxRow>
                 <ChartsBox>
                     <Chart
-                        chartType="Line"
+                        chartType="AreaChart"
                         width="100%"
                         height="300px"
                         data={data}
