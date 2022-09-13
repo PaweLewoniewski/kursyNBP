@@ -30,7 +30,7 @@ const CurrencySelectinput = ({multipleCurrencies,parrenthandler}:CurrencySelectP
     const handleChangeCurrency = (event: any) => {
         setCurrency(event.target.value);
         setValues({amount: sell});
-        api.getSingleLastCurrency();
+        //api.getSingleLastCurrency();
     };
 
     useEffect(() => {

@@ -11,8 +11,6 @@ type GoldPriceTypes = {
 const GoldPage = () => {
 
     const [lastgoldPrices, setlastgoldPrices] = useState<GoldPriceTypes[]>();
-    const [goldValueer, setgoldValueer] = useState();
-
 
     useEffect(() => {
         async function FetchData() {
@@ -27,7 +25,7 @@ const GoldPage = () => {
 
     const data = [
         [
-            "Day",
+            "Dzień",
             "Cena złota"
         ],
         
