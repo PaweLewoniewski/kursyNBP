@@ -5,7 +5,7 @@ import CurrencySelectinput, {
 import { Chart } from "react-google-charts";
 import { useEffect, useState } from "react";
 import api from "../../queries/fetchMidCurrencyQuery";
-import { Button, ButtonGroup, Tab, Tabs } from "@mui/material";
+import { Tab, Tabs } from "@mui/material";
 
 export type LastCurrentCurrencyTypes = {
   effectiveDate: string;
@@ -22,12 +22,11 @@ const CalculatorPage = () => {
   const [currentCurrency, setCurrentCurrency] = useState<
     MultipleCurrencyDataTypes | undefined
   >();
-  const [value, setValue] = useState(0);
 
+  const [value, setValue] = useState(0);
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
-
 
   const FetchData = async (code: string) => {
     const tmp = await api.getSingleLastCurrency(code);
@@ -50,10 +49,12 @@ const CalculatorPage = () => {
     FetchData();
   }, []);
 
+
   const daneLabelsAsk =
     currentCurrencyLast !== undefined
       ? currentCurrencyLast.map((item) => [item.effectiveDate, item.ask])
       : [0, 0];
+
 
   const data = [
     [
@@ -93,7 +94,7 @@ const CalculatorPage = () => {
   ];
 
   const options = {
-    title: `Kurs sprzedaży`,
+    title: `${value === 0 ? `Kurs kupna` : `Kurs sprzedaży`}`,
     colors: ["green"],
   };
 
