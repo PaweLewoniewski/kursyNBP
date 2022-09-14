@@ -1,8 +1,6 @@
 import { FormControl, InputAdornment, MenuItem, OutlinedInput, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import api from "../../queries/fetchMidCurrencyQuery";
-
 
 export type MultipleCurrencyDataTypes = {
     currency: string;
@@ -26,17 +24,15 @@ const CurrencySelectinput = ({multipleCurrencies,parrenthandler}:CurrencySelectP
     const sellDown = currentValueTop?.ask ? currentValueTop.ask : 1;
     const [valuesTop, setValuesTop] = useState({amount: 1 });
     const [valuesDown, setValuesDown] = useState({amount: sellDown});
-
     const[saveTopValue, setsaveTopValue] = useState<number>(1);
-   // const[saveBottomValue, setsaveBottomValue] = useState<number>();
-
 
     const caclulations = () => {
         let calc = 0;
         let res = 0;
         calc = sellDown / sellTop;
         res = calc * saveTopValue;
-        console.log(res.toFixed(4));
+        let stinger = +res.toFixed(4);
+        setValuesDown({amount: stinger});
     } 
 
 
@@ -65,9 +61,8 @@ const CurrencySelectinput = ({multipleCurrencies,parrenthandler}:CurrencySelectP
         setValuesDown({amount: sellDown});
         caclulations();
         parrenthandler(currentValueTop);
+        // eslint-disable-next-line 
     }, [sellTop,sellDown,saveTopValue]);
-
-
 
     return (
         <>

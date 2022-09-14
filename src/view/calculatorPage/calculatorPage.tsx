@@ -5,7 +5,7 @@ import CurrencySelectinput, {
 import { Chart } from "react-google-charts";
 import { useEffect, useState } from "react";
 import api from "../../queries/fetchMidCurrencyQuery";
-import { Button, ButtonGroup } from "@mui/material";
+import { Button, ButtonGroup, Tab, Tabs } from "@mui/material";
 
 export type LastCurrentCurrencyTypes = {
   effectiveDate: string;
@@ -22,6 +22,12 @@ const CalculatorPage = () => {
   const [currentCurrency, setCurrentCurrency] = useState<
     MultipleCurrencyDataTypes | undefined
   >();
+  const [value, setValue] = useState(0);
+
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
+
 
   const FetchData = async (code: string) => {
     const tmp = await api.getSingleLastCurrency(code);
@@ -95,33 +101,39 @@ const CalculatorPage = () => {
     <Contener>
       <PageBox>
         <BtnContener>
-          <ButtonGroup size="large" aria-label="large button group">
-            <Button key="buy">Kupno</Button>
-            <Button key="sell">Sprzedaż</Button>
-          </ButtonGroup>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            variant="scrollable"
+            scrollButtons={false}
+            aria-label="scrollable prevent tabs example"
+          >
+            <Tab label="Kupno" />
+            <Tab label="Sprzedaż" />
+          </Tabs>
         </BtnContener>
         <Box>
-        <BoxCol>
-          <CurrencySelectinput
-            multipleCurrencies={multipleCurrency}
-            parrenthandler={callbackhandler}
-          />
-        </BoxCol>
-        <BoxRow>
-          {currentCurrency !== undefined ? (
-            <ChartsBox>
-              <Chart
-                chartType="AreaChart"
-                width="100%"
-                height="300px"
-                data={data}
-                options={options}
-              />
-            </ChartsBox>
-          ) : (
-            ""
-          )}
-        </BoxRow>
+          <BoxCol>
+            <CurrencySelectinput
+              multipleCurrencies={multipleCurrency}
+              parrenthandler={callbackhandler}
+            />
+          </BoxCol>
+          <BoxRow>
+            {currentCurrency !== undefined ? (
+              <ChartsBox>
+                <Chart
+                  chartType="AreaChart"
+                  width="100%"
+                  height="300px"
+                  data={data}
+                  options={options}
+                />
+              </ChartsBox>
+            ) : (
+              ""
+            )}
+          </BoxRow>
         </Box>
       </PageBox>
     </Contener>
@@ -140,13 +152,13 @@ const BoxCol = styled.div`
   display: flex;
   flex-direction: column;
   padding: 25px;
-  /* width:420px; */
 `;
 
 const Box = styled.div`
   display: flex;
   flex-direction: row;
-  border:1px solid #8cbae6;
+  border: 1px solid #8cbae6;
+  background: white;
 `;
 
 const BoxRow = styled.div`
@@ -158,7 +170,7 @@ const BoxRow = styled.div`
 const ChartsBox = styled.div`
   display: flex;
   flex-direction: row;
-  width:600px;
+  width: 600px;
 `;
 
 const BtnContener = styled.div`

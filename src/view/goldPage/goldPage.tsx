@@ -110,7 +110,6 @@ const BoxRow = styled.div`
 const ChartsBox = styled.div`
     display:flex;
     flex-direction:row;
-    padding:25px;
     width:600px;
 `;
 
