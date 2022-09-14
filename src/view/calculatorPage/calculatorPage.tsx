@@ -102,10 +102,10 @@ const CalculatorPage = () => {
         </BtnContener>
         <Box>
         <BoxCol>
-          <CurrencySelectinput
+          {/* <CurrencySelectinput
             multipleCurrencies={multipleCurrency}
             parrenthandler={callbackhandler}
-          />
+          /> */}
           <CurrencySelectinput
             multipleCurrencies={multipleCurrency}
             parrenthandler={callbackhandler}
