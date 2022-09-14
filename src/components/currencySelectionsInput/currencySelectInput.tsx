@@ -24,16 +24,22 @@ const CurrencySelectinput = ({multipleCurrencies,parrenthandler}:CurrencySelectP
     const currentValueDown = multipleCurrencies?.find(item => item.code === currencyDown);
     const sellTop = currentValueTop?.ask ? currentValueTop.ask : 1;
     const sellDown = currentValueDown?.ask ? currentValueDown.ask : 1;
-    const [valuesTop, setValuesTop] = useState({amount: 1 });
-    const [valuesDown, setValuesDown] = useState({amount:1});
+    const [valuesTop, setValuesTop] = useState({amount: sellTop });
+    const [valuesDown, setValuesDown] = useState({amount: sellDown});
 
 
 
     const caclulations = () => {
+       console.log(valuesDown);
+        // let calc = 0;
+        // if(currencyDown === 'PLN'){
+        //     return calc = valuesTop.amount * valuesDown.amount;
+        // }
+        // if(valuesTop.amount >= valuesDown.amount){
+        //     return calc = valuesTop.amount / valuesDown.amount;
+        // }
         // let res = valuesTop.amount / valuesDown.amount;
         // return console.log(res);
-        console.log(`aamounttop: ${valuesTop.amount}`);
-        console.log(`amountDown: ${valuesDown.amount}`);
     }
 
     // const caclulationsMultipler = () => {
@@ -45,6 +51,7 @@ const CurrencySelectinput = ({multipleCurrencies,parrenthandler}:CurrencySelectP
 
     const handleChangeTop = (prop: any) => (event: { target: { value: any; }; }) => {
         setValuesTop({ ...valuesTop, [prop]: event.target.value });
+        // console.log(valuesTop.amount)
     };
 
     const handleChangeCurrencyTop = (event: any) => {
@@ -67,7 +74,7 @@ const CurrencySelectinput = ({multipleCurrencies,parrenthandler}:CurrencySelectP
         setValuesDown({amount: sellDown});
         caclulations();
         // parrenthandler(currentValue);
-    }, [sellTop,sellDown]);
+    }, [sellTop,sellDown,valuesTop.amount, valuesDown.amount]);
 
 
 
