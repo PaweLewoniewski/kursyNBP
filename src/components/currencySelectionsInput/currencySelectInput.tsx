@@ -74,7 +74,7 @@ const CurrencySelectinput = ({multipleCurrencies,parrenthandler}:CurrencySelectP
         setValuesDown({amount: sellDown});
         caclulations();
         // parrenthandler(currentValue);
-    }, [sellTop,sellDown,valuesTop.amount, valuesDown.amount]);
+    }, [sellTop,sellDown]);
 
 
 
