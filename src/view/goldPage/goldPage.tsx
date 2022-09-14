@@ -111,6 +111,7 @@ const ChartsBox = styled.div`
     display:flex;
     flex-direction:row;
     padding:25px;
+    width:600px;
 `;
 
 
@@ -127,28 +128,3 @@ const ItemName = styled.p`
     color:black;
     padding:5px 35px;
 `;
-
-
-    // const state = {
-    //     labels: lastgoldPrices !== undefined && lastgoldPrices.map(item => item.data),
-    //     datasets: [
-    //       {
-    //         label: 'Rainfall',
-    //         backgroundColor: [
-    //           '#B21F00',
-    //           '#C9DE00',
-    //           '#2FDE00',
-    //           '#00A6B4',
-    //           '#6800B4'
-    //         ],
-    //         hoverBackgroundColor: [
-    //         '#501800',
-    //         '#4B5000',
-    //         '#175000',
-    //         '#003350',
-    //         '#35014F'
-    //         ],
-    //         data: lastgoldPrices !== undefined && lastgoldPrices.map(item => item.cena)
-    //       }
-    //     ]
-    //   }
