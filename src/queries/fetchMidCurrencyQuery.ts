@@ -1,7 +1,7 @@
 
 const queryMidCurrency = 'https://api.nbp.pl/api/exchangerates/tables/a';
 //const querySingleLastDaysCurrerncy = 'https://api.nbp.pl/api/exchangerates/rates/c/usd/last/30/';
-const queryBidAskCurrency = 'httpss://api.nbp.pl/api/exchangerates/tables/c/';
+const queryBidAskCurrency = 'https://api.nbp.pl/api/exchangerates/tables/c/';
 const queryGoldLast = 'https://api.nbp.pl/api/cenyzlota/last/30';
 //const querySingleCurrency = 'https://api.nbp.pl/api/exchangerates/rates/c/usd';
 //const querySingleRageCurrency = 'http://api.nbp.pl/api/exchangerates/rates/c/usd/2022-08-01/2022-08-30/';
