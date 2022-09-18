@@ -25,9 +25,9 @@ const api = {
             console.error(err);
         }
     },
-    getSingleLastCurrency: async () => {
+    getSingleLastCurrency: async (code:string) => {
         try {
-            const response = await fetch(querySingleLastDaysCurrerncy, {
+            const response = await fetch(`http://api.nbp.pl/api/exchangerates/rates/c/${code}/last/30/`, {
                 method: "GET",
                 headers: {
                     Accept: "application/json",
@@ -36,7 +36,7 @@ const api = {
                 },
             });
             const data = await response.json();
-            return console.log(data);
+            return data.rates;
         } catch (err: any) {
             console.error(err);
         }

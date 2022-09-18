@@ -1,105 +1,186 @@
 import styled from "styled-components";
-import CurrencySelectinput, { MultipleCurrencyDataTypes } from "../../components/currencySelectionsInput/currencySelectInput";
+import CurrencySelectinput, {
+  MultipleCurrencyDataTypes,
+} from "../../components/currencySelectionsInput/currencySelectInput";
 import { Chart } from "react-google-charts";
 import { useEffect, useState } from "react";
 import api from "../../queries/fetchMidCurrencyQuery";
+import { Tab, Tabs } from "@mui/material";
 
+export type LastCurrentCurrencyTypes = {
+  effectiveDate: string;
+  bid: number;
+  ask: number;
+};
 
 const CalculatorPage = () => {
+  const [multipleCurrency, setMultipleCurrency] =
+    useState<MultipleCurrencyDataTypes[]>();
+  const [currentCurrencyLast, setCurrentCurrencyLast] = useState<
+    LastCurrentCurrencyTypes[] | undefined
+  >();
+  const [currentCurrency, setCurrentCurrency] = useState<
+    MultipleCurrencyDataTypes | undefined
+  >();
 
+  const [value, setValue] = useState(0);
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
 
-    const [multipleCurrency, setMultipleCurrency] = useState<MultipleCurrencyDataTypes[]>();
-    //const [currentCurrencyFirst, setCurrentCurrencyFirst] = useState();
-    // const [currentCurrencySec, setCurrentCurrencySec] = useState();
+  const FetchData = async (code: string) => {
+    const tmp = await api.getSingleLastCurrency(code);
+    setCurrentCurrencyLast(tmp);
+  };
 
-    const callbackhandler = (props:any) => {
-        console.log(props);
+  const callbackhandler = (props: MultipleCurrencyDataTypes) => {
+    console.log(props);
+    setCurrentCurrency(props);
+    if (props && props?.code !== undefined) {
+      FetchData(props.code);
     }
+  };
 
-    useEffect(() => {
-        async function FetchData() {
-            const tmp = await api.getMultipleCurrency();
-            setMultipleCurrency(tmp);
-        }
-        FetchData();
-    }, []);
+  useEffect(() => {
+    async function FetchData() {
+      const tmp = await api.getMultipleCurrency();
+      setMultipleCurrency(tmp);
+    }
+    FetchData();
+  }, []);
 
 
-    const data = [
-        [
-            "Day",
-            "Guardians of the Galaxy",
-            "The Avengers",
+  const daneLabelsAsk =
+    currentCurrencyLast !== undefined
+      ? currentCurrencyLast.map((item) => [item.effectiveDate, item.ask])
+      : [0, 0];
 
-        ],
-        [1, 37.8, 80.8],
-        [2, 30.9, 69.5],
-        [3, 25.4, 57],
-        [4, 11.7, 18.8],
-        [5, 11.9, 17.6],
-        [6, 8.8, 13.6],
-        [7, 7.6, 12.3],
-        [8, 12.3, 29.2],
-        [9, 16.9, 42.9],
-        [10, 12.8, 30.9],
-        [11, 5.3, 7.9],
-        [12, 6.6, 8.4],
-        [13, 4.8, 6.3],
-        [14, 4.2, 6.2],
-    ];
 
-    const options = {
-        chart: {
-            title: "Z ostatnich 30 dni",
-            subtitle: "kurs sprzedaży",
-        },
-    };
+  const data = [
+    [
+      "Dzień",
+      `${currentCurrency ? currentCurrency?.currency : "wybierz walutę"}`,
+    ],
+    daneLabelsAsk[0],
+    daneLabelsAsk[1],
+    daneLabelsAsk[2],
+    daneLabelsAsk[3],
+    daneLabelsAsk[4],
+    daneLabelsAsk[5],
+    daneLabelsAsk[6],
+    daneLabelsAsk[7],
+    daneLabelsAsk[8],
+    daneLabelsAsk[9],
+    daneLabelsAsk[10],
+    daneLabelsAsk[11],
+    daneLabelsAsk[12],
+    daneLabelsAsk[13],
+    daneLabelsAsk[14],
+    daneLabelsAsk[15],
+    daneLabelsAsk[16],
+    daneLabelsAsk[17],
+    daneLabelsAsk[18],
+    daneLabelsAsk[19],
+    daneLabelsAsk[20],
+    daneLabelsAsk[21],
+    daneLabelsAsk[22],
+    daneLabelsAsk[23],
+    daneLabelsAsk[24],
+    daneLabelsAsk[25],
+    daneLabelsAsk[26],
+    daneLabelsAsk[27],
+    daneLabelsAsk[28],
+    daneLabelsAsk[29],
+  ];
 
-    return (
-        <Contener>
-            <BoxCol>
-                <CurrencySelectinput multipleCurrencies={multipleCurrency} parrenthandler={callbackhandler} />
-                <CurrencySelectinput multipleCurrencies={multipleCurrency}  parrenthandler={callbackhandler} />
-            </BoxCol>
-            <BoxRow>
-                <ChartsBox>
-                    <Chart
-                        chartType="Line"
-                        width="100%"
-                        height="300px"
-                        data={data}
-                        options={options}
-                    />
-                </ChartsBox>
-            </BoxRow>
-        </Contener>
-    );
+  const options = {
+    title: `${value === 0 ? `Kurs kupna` : `Kurs sprzedaży`}`,
+    colors: ["green"],
+  };
+
+  return (
+    <Contener>
+      <PageBox>
+        <BtnContener>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            variant="scrollable"
+            scrollButtons={false}
+            aria-label="scrollable prevent tabs example"
+          >
+            <Tab label="Kupno" />
+            <Tab label="Sprzedaż" />
+          </Tabs>
+        </BtnContener>
+        <Box>
+          <BoxCol>
+            <CurrencySelectinput
+              multipleCurrencies={multipleCurrency}
+              parrenthandler={callbackhandler}
+            />
+          </BoxCol>
+          <BoxRow>
+            {currentCurrency !== undefined ? (
+              <ChartsBox>
+                <Chart
+                  chartType="AreaChart"
+                  width="100%"
+                  height="300px"
+                  data={data}
+                  options={options}
+                />
+              </ChartsBox>
+            ) : (
+              ""
+            )}
+          </BoxRow>
+        </Box>
+      </PageBox>
+    </Contener>
+  );
 };
 export default CalculatorPage;
 
 const Contener = styled.div`
-    display:flex;
-    width:100%;
-    margin:20px 0;
-    justify-content:center ;
+  display: flex;
+  width: 100%;
+  margin: 20px 0;
+  justify-content: center;
 `;
 
 const BoxCol = styled.div`
-    display:flex;
-    flex-direction:column;
-    padding:25px;
-    /* width:420px; */
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+`;
+
+const Box = styled.div`
+  display: flex;
+  flex-direction: row;
+  border: 1px solid #8cbae6;
+  background: white;
 `;
 
 const BoxRow = styled.div`
-    display:flex;
-    flex-direction:row;
-    padding:25px;
+  display: flex;
+  flex-direction: row;
+  padding: 25px;
 `;
 
 const ChartsBox = styled.div`
-    display:flex;
-    flex-direction:row;
-    padding:25px;
-    border:1px solid black;
+  display: flex;
+  flex-direction: row;
+  width: 600px;
+`;
+
+const BtnContener = styled.div`
+  display: flex;
+  justify-content: flex-start;
+`;
+
+const PageBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 `;

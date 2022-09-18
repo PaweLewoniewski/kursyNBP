@@ -11,8 +11,6 @@ type GoldPriceTypes = {
 const GoldPage = () => {
 
     const [lastgoldPrices, setlastgoldPrices] = useState<GoldPriceTypes[]>();
-    const [goldValueer, setgoldValueer] = useState();
-
 
     useEffect(() => {
         async function FetchData() {
@@ -27,7 +25,7 @@ const GoldPage = () => {
 
     const data = [
         [
-            "Day",
+            "Dzień",
             "Cena złota"
         ],
         
@@ -64,10 +62,8 @@ const GoldPage = () => {
     ];
 
     const options = {
-        chart: {
-            title: "Aktualnie obowiązująca cena złota NBP",
-            subtitle: "Z ostatnich 30 dni",
-        },
+        title: "Aktualnie obowiązująca cena złota NBP",
+        colors: ['gold'],
     };
 
     return (
@@ -78,7 +74,7 @@ const GoldPage = () => {
             <BoxRow>
                 <ChartsBox>
                     <Chart
-                        chartType="Line"
+                        chartType="AreaChart"
                         width="100%"
                         height="300px"
                         data={data}
@@ -114,7 +110,7 @@ const BoxRow = styled.div`
 const ChartsBox = styled.div`
     display:flex;
     flex-direction:row;
-    padding:25px;
+    width:600px;
 `;
 
 
@@ -131,28 +127,3 @@ const ItemName = styled.p`
     color:black;
     padding:5px 35px;
 `;
-
-
-    // const state = {
-    //     labels: lastgoldPrices !== undefined && lastgoldPrices.map(item => item.data),
-    //     datasets: [
-    //       {
-    //         label: 'Rainfall',
-    //         backgroundColor: [
-    //           '#B21F00',
-    //           '#C9DE00',
-    //           '#2FDE00',
-    //           '#00A6B4',
-    //           '#6800B4'
-    //         ],
-    //         hoverBackgroundColor: [
-    //         '#501800',
-    //         '#4B5000',
-    //         '#175000',
-    //         '#003350',
-    //         '#35014F'
-    //         ],
-    //         data: lastgoldPrices !== undefined && lastgoldPrices.map(item => item.cena)
-    //       }
-    //     ]
-    //   }
