@@ -93,6 +93,7 @@ const Contener = styled.div`
     width:100%;
     margin:20px 0;
     justify-content:center ;
+    flex-wrap: wrap;
 `;
 
 const BoxCol = styled.div`
@@ -111,6 +112,9 @@ const ChartsBox = styled.div`
     display:flex;
     flex-direction:row;
     width:600px;
+    @media (max-width: 600px) {
+    width: 500px;
+  }
 `;
 
 

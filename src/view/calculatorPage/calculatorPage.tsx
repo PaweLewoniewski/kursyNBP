@@ -34,7 +34,6 @@ const CalculatorPage = () => {
   };
 
   const callbackhandler = (props: MultipleCurrencyDataTypes) => {
-    console.log(props);
     setCurrentCurrency(props);
     if (props && props?.code !== undefined) {
       FetchData(props.code);
@@ -51,9 +50,23 @@ const CalculatorPage = () => {
 
   const daneLabels =
     currentCurrencyLast !== undefined
-      ? currentCurrencyLast.map((item) => [item.effectiveDate, bidSwap === 0 ? item.ask : item.bid])
+      ? currentCurrencyLast.map((item) => [
+          item.effectiveDate,
+          bidSwap === 0 ? item.ask : item.bid,
+        ])
       : [0, 0];
 
+  const specificCurrencies =
+    multipleCurrency !== undefined
+      ? multipleCurrency.filter(
+          (curr) =>
+            curr.code.includes("USD") ||
+            curr.code.includes("EUR") ||
+            curr.code.includes("GBP") ||
+            curr.code.includes("CHF")
+        )
+      : [];
+  console.log(specificCurrencies);
   const data = [
     [
       "Dzień",
@@ -134,6 +147,13 @@ const CalculatorPage = () => {
               ""
             )}
           </BoxRow>
+          <BoxCol>
+            {specificCurrencies.map((item) => 
+            <ItemBox>
+                  <ItemName><p>{item.currency}:</p>&nbsp;<p>{bidSwap === 0 ? item.bid.toFixed(2) : item.ask.toFixed(2)}&nbsp;zł</p></ItemName>
+          </ItemBox>
+            )}
+          </BoxCol>
         </Box>
       </PageBox>
     </Contener>
@@ -159,18 +179,26 @@ const Box = styled.div`
   flex-direction: row;
   border: 1px solid #8cbae6;
   background: white;
+  flex-wrap: wrap;
+  justify-content: center;
 `;
 
 const BoxRow = styled.div`
   display: flex;
   flex-direction: row;
   padding: 25px;
+  @media (max-width: 800px) {
+    padding:0;
+  }
 `;
 
 const ChartsBox = styled.div`
   display: flex;
   flex-direction: row;
   width: 600px;
+  @media (max-width: 600px) {
+    width: 500px;
+  }
 `;
 
 const BtnContener = styled.div`
@@ -181,5 +209,23 @@ const BtnContener = styled.div`
 const PageBox = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+`;
+
+const ItemBox = styled.div`
+  display: flex;
+  border-radius: 5px;
+  box-shadow: 1px 2px 7px rgb(0 0 0 / 10%);
+`;
+
+const ItemName = styled.div`
+  display:flex;
+  justify-content: space-between;
+  padding: 5px 35px;
+  width:100%;
+  p{
+    font-size: 1em;
+  color: black;
+  }
 `;

@@ -69,7 +69,7 @@ const Logo = styled.h1`
 `;
 
 const Content = styled.div`
-height:100vh;
+min-height:100vh;
 width:100%;
 background: rgb(51,0,93);
 background:linear-gradient(0deg,rgb(253 255 226) 0%,rgba(255,255,255,1) 100%);

@@ -20,3 +20,11 @@ html {
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.7);
   background-color: #ffffff;
 }
+
+p::first-letter {
+  text-transform:capitalize;
+}
+
+.MuiSelect-select::first-letter {
+  text-transform:capitalize;
+}

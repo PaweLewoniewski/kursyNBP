@@ -32,10 +32,10 @@ const CurrencySelectinput = ({multipleCurrencies,parrenthandler,swapper}:Currenc
         sellTop = currentValueDown?.bid ? currentValueDown.bid : 1;
         sellDown  = currentValueTop?.bid ? currentValueTop.bid : 1;
     }
-    
+
     const [valuesTop, setValuesTop] = useState({amount: 1 });
     const [valuesDown, setValuesDown] = useState({amount: sellDown});
-    const[saveTopValue, setsaveTopValue] = useState<number>(1);
+    const [saveTopValue, setsaveTopValue] = useState<number>(1);
 
     const caclulations = () => {
         let calc = 0;
@@ -45,7 +45,6 @@ const CurrencySelectinput = ({multipleCurrencies,parrenthandler,swapper}:Currenc
         let stinger = +res.toFixed(4);
         setValuesDown({amount: stinger});
     } 
-
 
     const handleChangeTop = (prop: any) => (event: { target: { value: any; }; }) => {
         setValuesTop({ ...valuesTop, [prop]: event.target.value });
@@ -95,7 +94,7 @@ const CurrencySelectinput = ({multipleCurrencies,parrenthandler,swapper}:Currenc
                 >
                     {multipleCurrencies !== undefined && multipleCurrencies.map((option) => (
                         <MenuItem key={option.code} value={option.code}>
-                            {option.currency}
+                            {option.currency[0].toUpperCase() + option.currency.slice(1)}
                         </MenuItem>
                     ))}
                 </TextField>
@@ -119,7 +118,7 @@ const CurrencySelectinput = ({multipleCurrencies,parrenthandler,swapper}:Currenc
                 >
                     {multipleCurrencies !== undefined && multipleCurrencies.map((option) => (
                         <MenuItem key={option.code} value={option.code}>
-                            {option.currency}
+                            {option.currency[0].toUpperCase() + option.currency.slice(1)}
                         </MenuItem>
                     ))}
                 </TextField>
