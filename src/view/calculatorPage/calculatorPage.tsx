@@ -49,48 +49,46 @@ const CalculatorPage = () => {
     FetchData();
   }, []);
 
-
-  const daneLabelsAsk =
+  const daneLabels =
     currentCurrencyLast !== undefined
-      ? currentCurrencyLast.map((item) => [item.effectiveDate, item.ask])
+      ? currentCurrencyLast.map((item) => [item.effectiveDate, value === 0 ? item.ask : item.bid])
       : [0, 0];
-
 
   const data = [
     [
       "Dzień",
       `${currentCurrency ? currentCurrency?.currency : "wybierz walutę"}`,
     ],
-    daneLabelsAsk[0],
-    daneLabelsAsk[1],
-    daneLabelsAsk[2],
-    daneLabelsAsk[3],
-    daneLabelsAsk[4],
-    daneLabelsAsk[5],
-    daneLabelsAsk[6],
-    daneLabelsAsk[7],
-    daneLabelsAsk[8],
-    daneLabelsAsk[9],
-    daneLabelsAsk[10],
-    daneLabelsAsk[11],
-    daneLabelsAsk[12],
-    daneLabelsAsk[13],
-    daneLabelsAsk[14],
-    daneLabelsAsk[15],
-    daneLabelsAsk[16],
-    daneLabelsAsk[17],
-    daneLabelsAsk[18],
-    daneLabelsAsk[19],
-    daneLabelsAsk[20],
-    daneLabelsAsk[21],
-    daneLabelsAsk[22],
-    daneLabelsAsk[23],
-    daneLabelsAsk[24],
-    daneLabelsAsk[25],
-    daneLabelsAsk[26],
-    daneLabelsAsk[27],
-    daneLabelsAsk[28],
-    daneLabelsAsk[29],
+    daneLabels[0],
+    daneLabels[1],
+    daneLabels[2],
+    daneLabels[3],
+    daneLabels[4],
+    daneLabels[5],
+    daneLabels[6],
+    daneLabels[7],
+    daneLabels[8],
+    daneLabels[9],
+    daneLabels[10],
+    daneLabels[11],
+    daneLabels[12],
+    daneLabels[13],
+    daneLabels[14],
+    daneLabels[15],
+    daneLabels[16],
+    daneLabels[17],
+    daneLabels[18],
+    daneLabels[19],
+    daneLabels[20],
+    daneLabels[21],
+    daneLabels[22],
+    daneLabels[23],
+    daneLabels[24],
+    daneLabels[25],
+    daneLabels[26],
+    daneLabels[27],
+    daneLabels[28],
+    daneLabels[29],
   ];
 
   const options = {
