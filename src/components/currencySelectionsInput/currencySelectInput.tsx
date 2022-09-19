@@ -24,7 +24,7 @@ const CurrencySelectinput = ({multipleCurrencies,parrenthandler,swapper}:Currenc
     let sellTop:number = 1; 
     let sellDown:number = 1; 
 
-    if(swapper === 0 ){
+    if(swapper === 1 ){
         sellTop = currentValueDown?.ask ? currentValueDown.ask : 1;
         sellDown = currentValueTop?.ask ? currentValueTop.ask : 1;
     }

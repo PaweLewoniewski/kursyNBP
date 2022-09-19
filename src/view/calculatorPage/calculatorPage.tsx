@@ -66,7 +66,7 @@ const CalculatorPage = () => {
             curr.code.includes("CHF")
         )
       : [];
-  console.log(specificCurrencies);
+
   const data = [
     [
       "Dzień",
