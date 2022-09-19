@@ -22,10 +22,10 @@ const CalculatorPage = () => {
   const [currentCurrency, setCurrentCurrency] = useState<
     MultipleCurrencyDataTypes | undefined
   >();
+  const [bidSwap, setbidSwap] = useState(0);
 
-  const [value, setValue] = useState(0);
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
+    setbidSwap(newValue);
   };
 
   const FetchData = async (code: string) => {
@@ -51,7 +51,7 @@ const CalculatorPage = () => {
 
   const daneLabels =
     currentCurrencyLast !== undefined
-      ? currentCurrencyLast.map((item) => [item.effectiveDate, value === 0 ? item.ask : item.bid])
+      ? currentCurrencyLast.map((item) => [item.effectiveDate, bidSwap === 0 ? item.ask : item.bid])
       : [0, 0];
 
   const data = [
@@ -92,7 +92,7 @@ const CalculatorPage = () => {
   ];
 
   const options = {
-    title: `${value === 0 ? `Kurs kupna` : `Kurs sprzedaży`}`,
+    title: `${bidSwap === 0 ? `Kurs kupna` : `Kurs sprzedaży`}`,
     colors: ["green"],
   };
 
@@ -101,7 +101,7 @@ const CalculatorPage = () => {
       <PageBox>
         <BtnContener>
           <Tabs
-            value={value}
+            value={bidSwap}
             onChange={handleChange}
             variant="scrollable"
             scrollButtons={false}
@@ -114,6 +114,7 @@ const CalculatorPage = () => {
         <Box>
           <BoxCol>
             <CurrencySelectinput
+              swapper={bidSwap}
               multipleCurrencies={multipleCurrency}
               parrenthandler={callbackhandler}
             />

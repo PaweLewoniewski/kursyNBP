@@ -12,16 +12,27 @@ export type MultipleCurrencyDataTypes = {
 interface CurrencySelectProps {
     multipleCurrencies?:MultipleCurrencyDataTypes[];
     parrenthandler:any;
+    swapper:number;
 }
 
-const CurrencySelectinput = ({multipleCurrencies,parrenthandler}:CurrencySelectProps) => {
+const CurrencySelectinput = ({multipleCurrencies,parrenthandler,swapper}:CurrencySelectProps) => {
 
     const [currencyTop, setCurrencyTop] = useState('USD');
     const [currencyDown, setCurrencyDown] = useState('PLN');
     const currentValueTop = multipleCurrencies?.find(item => item.code === currencyTop);
     const currentValueDown = multipleCurrencies?.find(item => item.code === currencyDown);
-    const sellTop = currentValueDown?.ask ? currentValueDown.ask : 1;
-    const sellDown = currentValueTop?.ask ? currentValueTop.ask : 1;
+    let sellTop:number = 1; 
+    let sellDown:number = 1; 
+
+    if(swapper === 0 ){
+        sellTop = currentValueDown?.ask ? currentValueDown.ask : 1;
+        sellDown = currentValueTop?.ask ? currentValueTop.ask : 1;
+    }
+    else {
+        sellTop = currentValueDown?.bid ? currentValueDown.bid : 1;
+        sellDown  = currentValueTop?.bid ? currentValueTop.bid : 1;
+    }
+    
     const [valuesTop, setValuesTop] = useState({amount: 1 });
     const [valuesDown, setValuesDown] = useState({amount: sellDown});
     const[saveTopValue, setsaveTopValue] = useState<number>(1);
